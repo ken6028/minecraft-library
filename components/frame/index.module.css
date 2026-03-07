@@ -1,0 +1,143 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    color: white;
+}
+
+
+.header {
+    padding: 20px;
+    text-align: center;
+    background-image: url("/grass2.png");
+    background-size: 96px 96px;
+    image-rendering: pixelated;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+
+
+
+.contentArea {
+    display: flex;
+    justify-content: center;
+
+    flex: 1;
+
+    overflow: hidden;
+    background-color: rgb(235, 235, 235);
+
+    background-image: url("/dirt2.png");
+    background-size: 96px 96px;
+    image-rendering: pixelated;
+}
+
+
+
+
+
+
+
+
+
+.content {
+    display: flex;
+
+    
+
+    overflow: hidden;
+
+    border-radius: 15px;
+    background-color: rgba(255, 247, 234, 0.9);
+
+    border: 2px solid black;
+}
+
+
+
+
+
+
+.categories {
+
+    width: 70px;
+    min-width: 70px;
+
+    padding: 10px 0;
+    gap: 10px;
+
+    background-color: rgba(0, 0, 0, 0.15);
+
+    overflow-y: auto;
+
+}
+
+.categories::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+
+.category {
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: 0;
+    left: 0;
+
+    width: calc(100% - 10px);
+    margin: 10px 0 0 10px;
+    padding: 5px;
+
+    user-select: none;
+    
+    border: 2px solid black;
+    border-radius: 15px 0 0 0;
+
+
+
+
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    font-size: 1.4rem;
+
+    font-weight: bold;
+    white-space: nowrap;
+    letter-spacing: 4px;
+
+
+    box-shadow: 0 5px 2px rgba(0, 0, 0, 0.6);
+    transition: all 0.3s ease;
+}
+
+.category:hover {
+    top: -10px;
+    left: -2px;
+
+    border-radius: 15px;
+    box-shadow: -5px 10px 2px rgba(0, 0, 0, 0.6);
+}
+
+
+
+.main {
+    display: flex;
+    flex-direction: column;
+
+    width: min(700px, 100vw);
+    padding: 20px;
+
+    overflow-y: auto;
+
+    color: black;
+}

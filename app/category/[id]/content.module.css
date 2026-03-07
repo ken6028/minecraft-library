@@ -1,0 +1,29 @@
+.title {
+    margin: 0;
+    padding: 0;
+    font-size: 32px;
+    font-weight: bold;
+    
+}
+
+.container {
+    width: 100%;
+
+}
+
+
+.contentLink {
+    display: inline-flex;
+    /* align-items: center;
+
+    font-size: 28px; */
+}
+
+
+.content {
+    display: inline;
+    padding: 5px;
+    text-decoration:underline;
+    
+    
+}
