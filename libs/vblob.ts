@@ -17,6 +17,7 @@ if (isSaveMode) {
         const urls = JSON.parse(data) as string[];
         BlobUrls.push(...urls);
     } else {
+        console.warn("init blob url list");
         list().then(res => {
             const urls = res.blobs.map(b => b.downloadUrl);
             BlobUrls.push(...urls);
@@ -32,6 +33,7 @@ export async function GetBlobUrls() {
         if (process.env.SAVE_API === "true") {
             return BlobUrls;
         }
+        console.warn("use blob list api");
         return (await list()).blobs.map(b => b.downloadUrl);
     }
     return [];
