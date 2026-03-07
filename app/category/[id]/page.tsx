@@ -1,4 +1,3 @@
-import { db } from "@/libs/db";
 import { getCategories, getCategory } from "@/libs/model";
 import { Screen_Category } from "./content";
 import { GetBlobUrls } from "@/libs/vblob";

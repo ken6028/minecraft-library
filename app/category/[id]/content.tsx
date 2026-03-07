@@ -2,7 +2,7 @@
 
 import { Content, Content_Control, Content_ControlButton } from "@/components/content";
 import { Frame, FrameProps } from "@/components/frame";
-import { Prisma } from "@/generated/prisma/client";
+import type { Prisma } from "@/generated/prisma/client";
 import Link from "next/link";
 
 import styles from "./content.module.css";
@@ -41,11 +41,14 @@ export function Screen_Category({ _categoryInfo, _imgUrls, _editMode, ...props }
     return (
         <Frame {...props}>
             {createForm}
-            <Content_Control>
-                <Content_ControlButton onClick={() => {createController.show()}}>
-                    コンテンツを追加
-                </Content_ControlButton>
-            </Content_Control>
+            {
+                _editMode &&
+                <Content_Control>
+                    <Content_ControlButton onClick={() => {createController.show()}}>
+                        コンテンツを追加
+                    </Content_ControlButton>
+                </Content_Control>
+            }
             <h1 className={styles.title}>{_categoryInfo.name}</h1>
             <div className={styles.container}>
                 {
