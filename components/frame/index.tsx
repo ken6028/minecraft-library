@@ -31,7 +31,7 @@ export function Frame({ _categories, children, ...props }: FrameProps) {
                 })
             )
         })}>
-            {loadingElement}
+            {/* {loadingElement} */}
 
             <div className={styles.header}>
                 <h1 className={styles.title}>
