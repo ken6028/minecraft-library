@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client"
   output   = "../generated/prisma"
@@ -13,59 +7,51 @@ datasource db {
   provider = "postgresql"
 }
 
-
-
-
-//!!! uuid のデフォルト設定がうまく行かないので生成関数を直接指定 本来は @default(uuid())
-
 model category {
-  id          String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name        String  @unique
-
-  red         Int     @default(0) @db.SmallInt
-  green       Int     @default(0) @db.SmallInt
-  blue        Int     @default(0) @db.SmallInt
-
-  index       Int     @default(autoincrement()) @db.Integer @unique
-  isPublished Boolean @default(false)
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String    @unique
+  red         Int       @default(0) @db.SmallInt
+  green       Int       @default(0) @db.SmallInt
+  blue        Int       @default(0) @db.SmallInt
   
+  index       Int       @unique @default(autoincrement())
+  isPublished Boolean   @default(false)
 
-  content content[]
+  content     content[]
 }
 
-
-
 model content {
-  id          String    @id @default(dbgenerated("gen_random_uuid()"))  @db.Uuid
+  id          String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   title       String
   body        String
   imgUrl      String?
-
-  categoryId  String    @db.Uuid
-  category    category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-
-  index       Int       @default(autoincrement())
-  isPublished Boolean   @default(false)
-
+  
+  index       Int           @default(autoincrement())
+  isPublished Boolean       @default(false)
+  
+  categoryId  String        @db.Uuid
+  category    category      @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  
+  contentprop contentprop[]
+  linkedProps contentprop[] @relation("contentLink")
 
   @@unique([categoryId, index])
-  contentprop contentprop[]
 }
-
-
 
 model contentprop {
   id            String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title         String  @default("")
   imgUrl        String?
-  youtubeEmbed  String?
   body          String
+  title         String  @default("")
+  youtubeEmbed  String?
 
-  contentId     String  @db.Uuid
-  content       content @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  contentLinkId String? @db.Uuid
+  contentLink   content? @relation("contentLink", fields: [contentLinkId], references: [id], onDelete: SetNull)
 
   index         Int     @default(autoincrement())
-
+  
+  contentId     String  @db.Uuid
+  content       content @relation(fields: [contentId], references: [id], onDelete: Cascade)
 
   @@unique([contentId, index])
 }

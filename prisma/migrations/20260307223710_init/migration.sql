@@ -1,40 +1,3 @@
-/*
-  Warnings:
-
-  - You are about to drop the `Category` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `CategoryContent` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `Content` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `Contentgroup` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `Contentprop` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropForeignKey
-ALTER TABLE "CategoryContent" DROP CONSTRAINT "CategoryContent_categoryId_fkey";
-
--- DropForeignKey
-ALTER TABLE "CategoryContent" DROP CONSTRAINT "CategoryContent_contentId_fkey";
-
--- DropForeignKey
-ALTER TABLE "Contentgroup" DROP CONSTRAINT "Contentgroup_contentId_fkey";
-
--- DropForeignKey
-ALTER TABLE "Contentgroup" DROP CONSTRAINT "Contentgroup_propId_fkey";
-
--- DropTable
-DROP TABLE "Category";
-
--- DropTable
-DROP TABLE "CategoryContent";
-
--- DropTable
-DROP TABLE "Content";
-
--- DropTable
-DROP TABLE "Contentgroup";
-
--- DropTable
-DROP TABLE "Contentprop";
-
 -- CreateTable
 CREATE TABLE "category" (
     "id" UUID NOT NULL DEFAULT gen_random_uuid(),
@@ -53,9 +16,10 @@ CREATE TABLE "content" (
     "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "title" TEXT NOT NULL,
     "body" TEXT NOT NULL,
-    "categoryId" UUID NOT NULL,
+    "imgUrl" TEXT,
     "index" SERIAL NOT NULL,
     "isPublished" BOOLEAN NOT NULL DEFAULT false,
+    "categoryId" UUID NOT NULL,
 
     CONSTRAINT "content_pkey" PRIMARY KEY ("id")
 );
@@ -65,8 +29,11 @@ CREATE TABLE "contentprop" (
     "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "imgUrl" TEXT,
     "body" TEXT NOT NULL,
-    "contentId" UUID NOT NULL,
+    "title" TEXT NOT NULL DEFAULT '',
+    "youtubeEmbed" TEXT,
+    "contentLinkId" UUID,
     "index" SERIAL NOT NULL,
+    "contentId" UUID NOT NULL,
 
     CONSTRAINT "contentprop_pkey" PRIMARY KEY ("id")
 );
@@ -85,6 +52,9 @@ CREATE UNIQUE INDEX "contentprop_contentId_index_key" ON "contentprop"("contentI
 
 -- AddForeignKey
 ALTER TABLE "content" ADD CONSTRAINT "content_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "category"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "contentprop" ADD CONSTRAINT "contentprop_contentLinkId_fkey" FOREIGN KEY ("contentLinkId") REFERENCES "content"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "contentprop" ADD CONSTRAINT "contentprop_contentId_fkey" FOREIGN KEY ("contentId") REFERENCES "content"("id") ON DELETE CASCADE ON UPDATE CASCADE;
