@@ -56,7 +56,7 @@ export function Screen_Category({ _categoryInfo, _imgUrls, _editMode, ...props }
                         <div key={index} className={styles.contentWrapper}>
                             <Link key={index} href={`/content/${content.id}`} className={styles.contentLink} >
                                 {/* {index} */}
-                                <Content _contentInfo={{...content, "contentprop": []}} _imgUrls={_imgUrls} _editorMode={_editMode} _showDescription={false} className={styles.content}/>
+                                <Content _contentInfo={{...content, "contentprop": []}} _imgUrls={_imgUrls}  _showDescription={false} className={styles.content}/>
                             </Link>
                         </div>
                     ))

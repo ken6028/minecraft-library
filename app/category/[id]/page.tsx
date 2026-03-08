@@ -1,6 +1,7 @@
 import { getCategories, getCategory } from "@/libs/model";
 import { Screen_Category } from "./content";
 import { GetBlobUrls } from "@/libs/vblob";
+import { ENV } from "@/libs/env";
 
 type Props = {
     params: Promise<{
@@ -24,7 +25,7 @@ export default async function Page({ params }: Props) {
     if (categoryInfo === undefined) {
         return <div></div>
     } else {
-        return <Screen_Category _categoryInfo={categoryInfo} _categories={_categories} _imgUrls={_imgUrls} /> 
+        return <Screen_Category _categoryInfo={categoryInfo} _categories={_categories} _imgUrls={_imgUrls} _editMode={ENV.isDevMode} /> 
     }
     
 }
