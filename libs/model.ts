@@ -1,5 +1,4 @@
-import { Prisma } from "@/generated/prisma/client";
-import { db } from "./db";
+import { db, EX_DB_ContentWithContentProp } from "./db";
 
 export function getCategories() {
     const res = db.category.findMany({
@@ -41,13 +40,16 @@ export function getContentsByCategoryId(categoryId: string) {
     return res;
 }
 
-export async function getContentInfo(id: string): Promise<Prisma.contentGetPayload<{include: {contentprop: true}}> | undefined> {
+export async function getContentInfo(id: string): Promise<EX_DB_ContentWithContentProp | undefined> {
     const res = await db.content.findUnique({
         where: {
             id
         },
         include: {
             contentprop: {
+                include: {
+                    contentLink: true
+                },
                 orderBy: {
                     index: "asc"
                 }
