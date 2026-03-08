@@ -3,15 +3,10 @@
 import { Frame, FrameProps } from "@/components/frame"
 import { Prisma } from "@/generated/prisma/client"
 import { Content } from "@/components/content"
+import { EX_DB_ContentPropWithLink, EX_DB_ContentWithContentProp } from "@/libs/db";
 
 export type ScreenProps = {
-    _contentInfo: Prisma.contentGetPayload<
-        {
-            include: {
-                contentprop: true
-            }
-        }
-    >;
+    _contentInfo: EX_DB_ContentWithContentProp;
     _imgUrls: string[];
     _editMode?: boolean;
 }

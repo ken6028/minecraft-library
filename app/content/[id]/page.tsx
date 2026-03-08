@@ -1,8 +1,8 @@
 import { Frame } from "@/components/frame";
 import { getCategories, getContentInfo } from "@/libs/model";
 import { Screen_ContentInfo } from "./content";
-import { PUBLIC } from "@/libs/public";
 import { GetBlobUrls } from "@/libs/vblob";
+import { ENV } from "@/libs/env";
 
 type Props = {
     params: Promise<{
@@ -32,6 +32,6 @@ export default async function Page({ params, searchParams }: Props) {
         return <Frame _categories={_categories}/>
 
     } else {
-        return <Screen_ContentInfo _contentInfo={_contentInfo} _categories={_categories} _imgUrls={_imgUrls} _editMode={PUBLIC.isDevMode && !isPreview} />
+        return <Screen_ContentInfo _contentInfo={_contentInfo} _categories={_categories} _imgUrls={_imgUrls} _editMode={ENV.isDevMode && !isPreview} />
     }
 }
