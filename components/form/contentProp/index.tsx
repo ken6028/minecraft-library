@@ -1,14 +1,13 @@
 import { API_CreateContentProp } from "@/app/api/contentprop/client";
-import { Prisma } from "@/generated/prisma/client";
 import { useState } from "react";
 import { Template } from "react-client-screen";
 
-import styles from "./index.module.css";
+import { EX_DB_ContentPropWithLink } from "@/libs/db";
 
 type Props = {
     _contentId: string;
 
-    _onCreate(result: Prisma.contentpropModel): void;
+    _onCreate(result: EX_DB_ContentPropWithLink): void;
 }
 
 

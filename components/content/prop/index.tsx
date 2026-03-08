@@ -1,14 +1,14 @@
-import { Prisma } from "@/generated/prisma/client";
-import Image from "next/image";
 import styles from "./index.module.css";
 import { MergeAttributes } from "react-client-screen";
 import { Content_Body, Content_Control, Content_ControlButton, Content_Img, Content_Title } from "..";
 import { useState } from "react";
 import { Confirm } from "@/components/confirm";
 import { API_DeleteContentProp, API_UpdateContentProp } from "@/app/api/contentprop/[id]/client";
+import { LinkedContent } from "../linkedcontent";
+import { EX_DB_ContentPropWithLink } from "@/libs/db";
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
-    _contentProp: Prisma.contentpropModel;
+    _contentProp: EX_DB_ContentPropWithLink;
     _imgUrls: string[];
     _editorMode?: boolean;
 
@@ -89,6 +89,10 @@ export function ContentProp({ _contentProp, _imgUrls, _editorMode, _onDelete, ch
             <Content_Title _title={title} _editorMode={_editorMode} _onChange={setTitle} />
             {
                 <Content_Body _body={body} _editorMode={_editorMode} _onChange={setBody} />
+            }
+            {
+                _contentProp.contentLink &&
+                <LinkedContent _content={_contentProp.contentLink} />
             }
             {children}
         </div>

@@ -1,7 +1,6 @@
 import { MergeAttributes, MergeClassNames } from "react-client-screen";
 import styles from "./index.module.css";
 import React, { HTMLAttributes, useState } from "react";
-import { Prisma } from "@/generated/prisma/client";
 import { ContentProp } from "./prop";
 import Image from "next/image";
 import { Select_Img } from "../img_select";
@@ -9,17 +8,12 @@ import { Confirm } from "../confirm";
 import { API_DeleteContent, API_UpdateContent } from "@/app/api/content/[id]/client";
 import { Form_CreateContentProp } from "../form/contentProp";
 import Link from "next/link";
+import { EX_DB_ContentWithContentProp } from "@/libs/db";
 
 
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
-    _contentInfo: Prisma.contentGetPayload<
-        {
-            include: {
-                contentprop: true
-            }
-        }
-    >;
+    _contentInfo: EX_DB_ContentWithContentProp;
     _showDescription?: boolean;
     _editorMode?: boolean;
     _imgUrls: string[]
