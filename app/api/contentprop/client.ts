@@ -1,5 +1,6 @@
 import { Prisma } from "@/generated/prisma/client";
 import { ContentPropCreateRequest } from "./route";
+import { EX_DB_ContentPropWithLink } from "@/libs/db";
 
 export async function API_CreateContentProp({ title, body, contentId }: ContentPropCreateRequest) {
     const formData = new FormData();
@@ -10,7 +11,7 @@ export async function API_CreateContentProp({ title, body, contentId }: ContentP
     const res = await fetch("/api/contentprop", {
         method: "POST",
         body: formData
-    }).then(res => res.ok ? res.json() as Promise<Prisma.contentpropModel> : null).catch(res => null);
+    }).then(res => res.ok ? res.json() as Promise<EX_DB_ContentPropWithLink> : null).catch(res => null);
 
     return res;
 }

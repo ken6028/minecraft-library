@@ -1,5 +1,5 @@
 import { db } from "@/libs/db";
-import { PUBLIC } from "@/libs/public";
+import { ENV } from "@/libs/env";
 import { NextRequest, NextResponse } from "next/server";
 
 
@@ -11,7 +11,7 @@ export type ContentPropCreateRequest = {
 }
 
 export async function POST(req: NextRequest) {
-    if (!PUBLIC.isDevMode) return new Response("Not allowed", { status: 403 });
+    if (!ENV.isDevMode) return new Response("Not allowed", { status: 403 });
 
 
     try {
@@ -25,6 +25,9 @@ export async function POST(req: NextRequest) {
                     title,
                     body,
                     contentId
+                },
+                include: {
+                    content: true
                 }
             }
         );

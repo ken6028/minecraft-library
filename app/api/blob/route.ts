@@ -1,9 +1,9 @@
-import { PUBLIC } from "@/libs/public";
+import { ENV } from "@/libs/env";
 import { AddBlob } from "@/libs/vblob";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-    if (!PUBLIC.isDevMode) return new Response("Not allowed", { status: 403 });
+    if (!ENV.isDevMode) return new Response("Not allowed", { status: 403 });
     const from = await req.formData();
 
     const file = from.get("file");
