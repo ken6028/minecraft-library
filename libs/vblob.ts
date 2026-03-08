@@ -1,12 +1,12 @@
 import { list, put } from "@vercel/blob";
-import { PUBLIC } from "./public";
+import { ENV } from "./env";
 
 import fs from "fs";
 import path from "path";
 
 
 
-const isSaveMode = PUBLIC.isDevMode && process.env.SAVE_API === "true";
+const isSaveMode = ENV.isDevMode && process.env.SAVE_API === "true";
 
 const tmp_path = path.join(process.cwd(), "tmp.json");
 const BlobUrls: string[] = [];
@@ -29,7 +29,7 @@ if (isSaveMode) {
 
 
 export async function GetBlobUrls() {
-    if (PUBLIC.isDevMode) {
+    if (ENV.isDevMode) {
         if (process.env.SAVE_API === "true") {
             return BlobUrls;
         }
@@ -41,7 +41,7 @@ export async function GetBlobUrls() {
 
 
 export async function AddBlob(file: File) {
-    if (!PUBLIC.isDevMode) return null;
+    if (!ENV.isDevMode) return null;
 
     if (!file.type.startsWith("image/")) return null;
     
