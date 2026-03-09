@@ -18,6 +18,9 @@ export function Screen_Home({ _categories }: FrameProps) {
                 <p>また、サイト制作の期間も1、2日程度で仕上げたものなのでバグ、品質には目をつぶってください。</p>
                 <h2 className={styles.endTitle}>それでは、楽しいマイクラライフを!!!</h2>
             </div>
+            <p className={styles.info}>
+                <strong>※Minecraft 及び シャオメイ の公式、公認サイトではありません。</strong>
+            </p>
         </Frame>
     );
 }
