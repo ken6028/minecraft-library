@@ -6,6 +6,7 @@ import styles from "./index.module.css";
 import { Template } from "react-client-screen";
 import { Prisma } from "@/generated/prisma/client";
 import Link from "next/link";
+import { SiteInfo } from "./info";
 
 
 
@@ -55,8 +56,8 @@ export function Frame({ _categories, children, ...props }: FrameProps) {
                         {children}
                     </div>
                 </div>
+                <SiteInfo />
             </div>
-
         </div>
     )
 }
