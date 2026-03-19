@@ -15,13 +15,14 @@ export async function POST(request: Request) {
     if (!ENV.isDevMode) return new Response("Not allowed", { status: 403 });
 
 
-    const form = await request.formData();
-    const title = form.get("title") as string;
-    const categoryId = form.get("categoryId") as string;
-    const color = form.get("color") as string;
-    const index = parseInt(form.get("index") as string);
 
     try {
+        const form = await request.formData();
+        const title = form.get("title") as string;
+        const categoryId = form.get("categoryId") as string;
+        const color = form.get("color") as string;
+        const index = parseInt(form.get("index") as string);
+
         const res: EXModel_BookSpine = await db.book.create({
             data: {
                 title,
@@ -52,9 +53,10 @@ export async function POST(request: Request) {
 export async function PUT(request: Request) {
     if (!ENV.isDevMode) return new Response("Not allowed", { status: 403 });
 
-    const req = await request.json() as API_IndexRecord[];
 
     try {
+        const req = await request.json() as API_IndexRecord[];
+
         await db.$transaction((db) => {
             return Promise.all(
                 req.map(item => (

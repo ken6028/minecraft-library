@@ -1,6 +1,7 @@
 import { db } from "@/libs/db";
 import { ENV } from "@/libs/env";
 import { NextResponse } from "next/server";
+import { API_IndexRecord } from "../api";
 
 
 
@@ -14,12 +15,13 @@ export type API_CategoryCreateRequest = {
 export async function POST(request: Request) {
     if (!ENV.isDevMode) return new Response("Not allowed", { status: 403 });
 
-    const form = await request.formData();
-    const name = form.get("name") as string;
-    const isPublic = form.get("isPublic") === "true";
-    const index = parseInt(form.get("index") as string);
 
     try {
+        const form = await request.formData();
+        const name = form.get("name") as string;
+        const isPublic = form.get("isPublic") === "true";
+        const index = parseInt(form.get("index") as string);
+
         const category = await db.bookCategory.create({
             data: {
                 name,
@@ -41,6 +43,38 @@ export async function POST(request: Request) {
         });
 
         return NextResponse.json(category);
+
+    } catch (e) {
+        console.error(e);
+        return new Response("Invalid request", { status: 400 });
+
+    }
+}
+
+
+
+export async function PUT(request: Request) {
+    if (!ENV.isDevMode) return new Response("Not allowed", { status: 403 });
+
+    try {
+        const req = await request.json() as API_IndexRecord[];
+
+        await db.$transaction((db) => {
+            return Promise.all(
+                req.map(item => (
+                    db.bookCategory.update({
+                        where: {
+                            id: item.id
+                        },
+                        data: {
+                            index: item.index
+                        }
+                    })
+                ))
+            )
+        })
+
+        return new Response("OK");
 
     } catch (e) {
         console.error(e);

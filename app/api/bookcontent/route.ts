@@ -56,9 +56,10 @@ export async function POST(request: Request) {
 export async function PUT(request: Request) {
     if (!ENV.isDevMode) return new Response("Not allowed", { status: 403 });
 
-    const req = await request.json() as API_IndexRecord[];
 
     try {
+        const req = await request.json() as API_IndexRecord[];
+
         await db.$transaction((db) => {
             return Promise.all(
                 req.map(item => (
