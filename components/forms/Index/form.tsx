@@ -1,16 +1,28 @@
 import { API_Book_UpdateIndex } from "@/app/api/book/client";
-import { EXModel_BookContentInfo, EXModel_BookContentPropInfo, EXModel_BookSpine } from "@/libs/db";
+import { EXModel_BookCategory, EXModel_BookContentInfo, EXModel_BookContentPropInfo, EXModel_BookSpine } from "@/libs/db";
 import { Element_Controller_Response } from "react-client-screen";
 
 import { API_BookContent_UpdateIndex } from "@/app/api/bookcontent/client";
 import { Form_Index_Base } from "./base";
 import { API_BookContentProp_UpdateIndex } from "@/app/api/bookcontentprop/client";
+import { API_Category_UpdateIndex } from "@/app/api/category/client";
 
 
 type Controller = {
     show(books: EXModel_BookSpine[]): void;
     hide(): void;
 }
+
+
+
+export function Form_Category_Index()  {
+    return Form_Index_Base<EXModel_BookCategory>(
+        (v) => v.name,
+        API_Category_UpdateIndex
+    )
+}
+
+
 
 
 

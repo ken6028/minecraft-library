@@ -6,7 +6,7 @@ import { AppProp_BookShelf } from "@/components/app_props/bookshelf/appProp";
 
 import { EditorRoot } from "@/components/app_props/editor/root/editor.root";
 import { Form_Book } from "@/components/forms/book/form";
-import { Form_BookIndex } from "@/components/forms/Index/form";
+import { Form_BookIndex, Form_Category_Index } from "@/components/forms/Index/form";
 import { Form_Category, Form_Category_Edit } from "@/components/forms/category/form";
 import { Button } from "@/components/props/input/button/input";
 import { PopupInfo } from "@/components/props/popup/info/popup";
@@ -42,7 +42,8 @@ export function Screen_Home({ _CanEdit = false, _categories }: Props) {
     const form_category = Form_Category(() => {
         setUpdate(v => v +1);
     });
-    
+    const form_categoryIndex = Form_Category_Index();
+
     
     return (
         <Frame_Base>
@@ -55,6 +56,9 @@ export function Screen_Home({ _CanEdit = false, _categories }: Props) {
                 <PopupInfo>
                     <Button onClick={() => form_category.controller.show(raw)}>
                         カテゴリーを追加
+                    </Button>
+                    <Button onClick={() => form_categoryIndex.controller.show(raw)}>
+                        カテゴリーを並べ替え
                     </Button>
                 </PopupInfo>
             }
@@ -112,6 +116,7 @@ export function Screen_Home({ _CanEdit = false, _categories }: Props) {
                 })
             }
             {form_category_edit.element}
+            {form_categoryIndex.element}
             {form_book.element}
             {form_bookIndex.element}
             {form_category.element}
