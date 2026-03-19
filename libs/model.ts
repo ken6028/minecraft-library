@@ -1,60 +1,66 @@
-import { db, EX_DB_ContentWithContentProp } from "./db";
+import { db, EXModel_BookCategories, EXModel_BookInfo } from "./db";
 
-export function getCategories() {
-    const res = db.category.findMany({
-        where: {
-            isPublished: true
-        },
-        orderBy: {
-            index: "asc"
-        }
-    });
-    return res;
-}
+export async function DB_GetBookCategories(publicOnly: boolean = true): Promise<EXModel_BookCategories> {
+    
+    const isPublic = publicOnly? {isPublic: publicOnly} : {};
+    
+    const categories = await db.bookCategory.findMany(
+        {
+            where: {
+                ...isPublic
+            },
+            select: {
+                id: true,
+                name: true,
 
-export async function getCategory(id: string) {
-    const res = await db.category.findUnique({
-        where: {
-            id
-        },
-        include: {
-            content: {
-                orderBy: {
-                    index: "asc"
+                index: true,
+                isPublic: true,
+                books: {
+                    where: {
+                        ...isPublic
+                    },
+                    select: {
+                        id: true,
+                        title: true,
+                        color: true,
+
+                        index: true,
+                        isPublic: true
+                    }
                 }
             }
         }
-    });
-    return res ?? undefined;
+    );
+
+    return categories;
 }
 
-export function getContentsByCategoryId(categoryId: string) {
-    const res = db.content.findMany({
-        where: {
-            categoryId
-        },
-        orderBy: {
-            index: "asc"
-        }
-    });
-    return res;
-}
 
-export async function getContentInfo(id: string): Promise<EX_DB_ContentWithContentProp | undefined> {
-    const res = await db.content.findUnique({
-        where: {
-            id
-        },
-        include: {
-            contentprop: {
-                include: {
-                    contentLink: true
-                },
-                orderBy: {
-                    index: "asc"
+export async function DB_GetBookInfo(bookId: string): Promise<EXModel_BookInfo | null> {
+    const bookInfo = await db.book.findUnique(
+        {
+            where: {
+                id: bookId
+            },
+            include: {
+                content: {
+                    include: {
+                        props: {
+                            include: {
+                                contentLink: {
+                                    select: {
+                                        id: true,
+                                        title: true,
+                                        bookId: true
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
-    });
-    return res ?? undefined;
+    );
+
+    return bookInfo;
 }

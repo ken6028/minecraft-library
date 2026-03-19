@@ -1,3 +1,9 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
 generator client {
   provider = "prisma-client"
   output   = "../generated/prisma"
@@ -7,51 +13,69 @@ datasource db {
   provider = "postgresql"
 }
 
-model category {
-  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name        String    @unique
-  red         Int       @default(0) @db.SmallInt
-  green       Int       @default(0) @db.SmallInt
-  blue        Int       @default(0) @db.SmallInt
-  
-  index       Int       @unique @default(autoincrement())
-  isPublished Boolean   @default(false)
 
-  content     content[]
+
+model BookCategory {
+  id          String   @id @db.Uuid @default(dbgenerated("gen_random_uuid()"))
+  name        String
+
+  index       Int      @default(0)
+  isPublic    Boolean  @default(false)
+
+  books       Book[]
 }
 
-model content {
-  id          String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+
+model Book {
+  id          String   @id @db.Uuid @default(dbgenerated("gen_random_uuid()"))
   title       String
-  body        String
-  imgUrl      String?
-  
-  index       Int           @default(autoincrement())
-  isPublished Boolean       @default(false)
-  
-  categoryId  String        @db.Uuid
-  category    category      @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  
-  contentprop contentprop[]
-  linkedProps contentprop[] @relation("contentLink")
 
-  @@unique([categoryId, index])
+  color       String   @db.Char(7) @default("#000000")
+
+  index       Int      @default(0)
+  isPublic    Boolean  @default(false)
+
+  categoryId  String        @db.Uuid
+  category    BookCategory  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  content     BookContent[]
 }
 
-model contentprop {
-  id            String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  imgUrl        String?
-  body          String
-  title         String  @default("")
-  youtubeEmbed  String?
+
+
+model BookContent {
+  id          String    @id @db.Uuid @default(dbgenerated("gen_random_uuid()"))
+  
+  title       String
+  info        String?
+  color       String    @db.Char(7) @default("#000000")
+
+
+  index       Int       @default(0)
+
+  bookId      String    @db.Uuid
+  book        Book      @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
+  props        BookContentProp[]
+  linkedProps   BookContentProp[] @relation("LinkedProps")
+}
+
+
+
+
+model BookContentProp {
+  bookContentId String      @db.Uuid
+  bookContent   BookContent @relation(fields: [bookContentId], references: [id], onDelete: Cascade)
+
+  id          String    @id @db.Uuid @default(dbgenerated("gen_random_uuid()"))
+  index       Int       @default(0)
+
+
+  title       String
+  imgUrl      String?
+  info        String?
+  body        String
 
   contentLinkId String? @db.Uuid
-  contentLink   content? @relation("contentLink", fields: [contentLinkId], references: [id], onDelete: SetNull)
-
-  index         Int     @default(autoincrement())
-  
-  contentId     String  @db.Uuid
-  content       content @relation(fields: [contentId], references: [id], onDelete: Cascade)
-
-  @@unique([contentId, index])
+  contentLink   BookContent? @relation("LinkedProps", fields: [contentLinkId], references: [id], onDelete: SetNull)
 }

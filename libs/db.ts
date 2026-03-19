@@ -11,22 +11,90 @@ const adapter = new PrismaPg({ connectionString });
 export const db = new PrismaClient({ adapter });
 
 
+export type EXModel_BookCategories = EXModel_BookCategory[];
 
 
-export type EX_DB_ContentPropWithLink = Prisma.contentpropGetPayload<{
+export type EXModel_BookCategory = Prisma.BookCategoryGetPayload<{
+    select: {
+        id: true;
+        name: true;
+
+        index: true;
+        isPublic: true;
+    },
     include: {
-        contentLink: true
+        books: {
+            select: {
+                id: true;
+                title: true;
+                color: true;
+
+                index: true;
+                isPublic: true;
+            }
+        }
     }
 }>;
 
-export type EX_DB_ContentWithContentProp = Prisma.contentGetPayload<{
+
+export type EXModel_BookSpine = Prisma.BookGetPayload<{
+    select: {
+        id: true;
+        title: true;
+        color: true;
+
+        index: true;
+        isPublic: true;
+    }
+}>;
+
+
+
+export type EXModel_BookInfo = Prisma.BookGetPayload<{
     include: {
-        contentprop: {
+        content: {
             include: {
-                contentLink: true
-            },
-            orderBy: {
-                index: "asc"
+                props: {
+                    include: {
+                        contentLink: {
+                            select: {
+                                id: true,
+                                title: true,
+                                bookId: true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}>;
+
+
+export type EXModel_BookContentInfo = Prisma.BookContentGetPayload<{
+    include: {
+        props: {
+            include: {
+                contentLink: {
+                    select: {
+                        id: true,
+                        title: true,
+                        bookId: true
+                    }
+                }
+            }
+        }
+    }
+}>;
+
+
+export type EXModel_BookContentPropInfo = Prisma.BookContentPropGetPayload<{
+    include: {
+        contentLink: {
+            select: {
+                id: true,
+                title: true,
+                bookId: true,
             }
         }
     }
