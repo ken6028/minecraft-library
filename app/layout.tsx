@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 
@@ -10,8 +10,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "うろ覚えマイクラ攻略本",
-  description: "久しぶりにマイクラをしたくなった人が勢いに任せて作ったサイトです。",
+  title: "マイクラ図書館",
+  description: "マイクラに関する情報を図書館風にまとめたサイトです。",
 };
 
 export default function RootLayout({

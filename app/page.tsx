@@ -1,11 +1,12 @@
-import { Screen_Home } from "./screen";
-import { EX_Props } from "@/libs/ex_props";
-
+import { Screen_Home } from "@/components/_screens/home/screen";
+import { ENV } from "@/libs/env";
+import { DB_GetBookCategories } from "@/libs/model";
 
 export default async function Page() {
-    const props = await EX_Props({});
+    const _categories = await DB_GetBookCategories(!ENV.isDevMode);
+    
     
     return (
-        <Screen_Home {...props} />
-    );
+        <Screen_Home _CanEdit={ENV.isDevMode} _categories={_categories}/>
+    )
 }

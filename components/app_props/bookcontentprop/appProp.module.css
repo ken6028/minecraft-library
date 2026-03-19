@@ -1,0 +1,14 @@
+.container {
+    padding: 0.5em;
+    border-radius: 0.5em;
+
+    
+    position: relative;
+
+
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.container:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+}

@@ -1,0 +1,10 @@
+.container {
+    padding: 0 0.5em;
+    position: relative;
+}
+
+.props {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}

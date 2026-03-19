@@ -1,0 +1,46 @@
+.container {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+
+    padding: 0.1em 0.25em;
+
+    user-select: none;
+    cursor: pointer;
+}
+
+.toggle {
+    width: 2em;
+    height: 1em;
+
+    border-radius: 9999px;
+
+    position: relative;
+
+    transition: transform 0.2s;
+
+    display: flex;
+    align-items: center;
+
+    outline: 3px solid black;
+}
+
+
+.circle {
+    width: 0.8em;
+    height: 0.8em;
+    
+    position: absolute;
+    right: 1.1em;
+
+    border-radius: 9999px;
+    background-color: black;
+
+    transition: all 0.2s;
+}
+
+.circle.on {
+    right: 0.1em;
+    
+    background-color: rgb(255, 255, 255);
+}

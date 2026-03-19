@@ -1,0 +1,21 @@
+.button {
+    padding: 0.5em 1em;
+
+
+    border: 0.125em solid black;
+    border-radius: 0.5em;
+    
+    
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: background-color 0.2s, color 0.2s;
+}
+
+
+.button:disabled {
+    background-color: rgb(200, 200, 200);
+    color: rgb(150, 150, 150);
+    cursor: not-allowed;
+}

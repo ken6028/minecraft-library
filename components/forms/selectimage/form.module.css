@@ -1,0 +1,48 @@
+.container {
+    width: min(25em, 100vw);
+    height: min(35em, 100vh);
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 0.5em;
+
+    overflow: hidden;
+}
+
+
+.control {
+    display: flex;
+    justify-content: center;
+    gap: 0.5em;
+}
+
+
+
+.imageWrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5em;
+
+
+    
+
+    padding: 0.5em;
+
+    flex: 1;
+
+    overflow-y: auto;
+}
+
+.image {
+    max-width: 16em;
+    
+    object-fit: contain;
+
+    cursor: pointer;
+}
+
+.image:hover {
+    outline: 0.1em solid black;
+}

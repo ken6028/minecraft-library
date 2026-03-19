@@ -1,0 +1,38 @@
+.container {
+
+    width: 100%;
+    padding: 0.2em;
+    gap: 0.2em;
+
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x proximity;
+
+    background-color: rgb(215, 114, 31);
+    border: 3px solid black;
+}
+
+
+.container.scroll {
+    scroll-snap-type: none;
+}
+
+.title {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: white;
+}
+
+
+
+.contentArea {
+    display: flex;
+    flex: 1;
+
+    height: 12em;
+    padding: 0.2em;
+
+    background-color: rgba(34, 21, 21, 0.129);
+
+    gap: 0.3em;
+}

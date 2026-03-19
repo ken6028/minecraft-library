@@ -1,0 +1,73 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    user-select: none;
+    scroll-snap-align: center;
+
+    color: black;
+    text-shadow: 0 0.1em 0.1em rgb(118, 118, 118);
+    
+    box-shadow: 0.1em 0.1em 0.2em 0.01em rgba(0, 0, 0, 0.556);
+
+    padding: 0.1em;
+    border-radius: 0.25em;
+    border: 0.1em solid black;
+    border-top: 0.2em solid rgba(255, 255, 255, 0.188);
+    border-bottom: 0.2em solid rgba(0, 0, 0, 0.242);
+    
+
+
+    position: relative;
+    top: 0;
+    outline: none;
+
+    transition: all 0.2s ;
+}
+
+.container.dark {
+    color: white;
+    text-shadow: 0 0.1em 0.1em rgb(0, 0, 0);
+}
+
+
+.container:hover {
+    top: -0.2em;
+    box-shadow: 0.2em 0.2em 0.2em 0.01em rgba(0, 0, 0, 0.556);
+    outline: 3px solid white;
+}
+
+
+
+
+.bookmark {
+    position: absolute;
+    top: -0.05em;
+    left: 5%;
+
+    border-color: rgb(217, 217, 217);
+
+    border-top-width: 5em;
+    border-left-width: 0.25em;
+    border-right-width: 0.25em;
+    border-bottom: 0.25em solid transparent;
+
+}
+
+
+
+.title {
+    padding: 0.2em 0.35em;
+    
+    font-size: 1.3em;
+    
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+
+}

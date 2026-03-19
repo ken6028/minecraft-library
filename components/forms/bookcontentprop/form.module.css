@@ -1,0 +1,8 @@
+.container {
+    justify-content: start;
+    
+    max-height: 100vh;
+    overflow-y: auto;
+
+    font-size: 1rem;
+}

@@ -1,0 +1,29 @@
+
+.primary {
+    background-color: rgb(36, 141, 210);
+    color: white;
+}
+.primary:hover {
+    background-color: rgb(41, 159, 238);
+    color: white;
+}
+
+
+.secondary {
+    background-color: rgb(49, 202, 49);
+    color: white;
+}
+.secondary:hover {
+    background-color: rgb(55, 233, 55);
+    color: white;
+}
+
+
+.danger {
+    background-color: rgb(210, 36, 36);
+    color: white;
+}
+.danger:hover {
+    background-color: rgb(238, 41, 41);
+    color: white;
+}

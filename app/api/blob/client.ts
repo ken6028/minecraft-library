@@ -1,6 +1,6 @@
 import { PutBlobResult } from "@vercel/blob";
 
-export async function API_UploadBlob(file: File) {
+export async function API_Blob_Upload(file: File) {
     const formData = new FormData();
     formData.append("file", file);
 
