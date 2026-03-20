@@ -2,10 +2,11 @@ import { EXModel_BookContentInfo } from "@/libs/db";
 import { API_BookContentCreateRequest } from "./route";
 import { API_IndexRecord } from "../api";
 
-export async function API_BokkContent_Create({ bookId, title, index }: API_BookContentCreateRequest) {
+export async function API_BokkContent_Create({ bookId, title, color, index }: API_BookContentCreateRequest) {
     const form = new FormData();
     form.append("bookId", bookId);
     form.append("title", title);
+    form.append("color", color);
     form.append("index", index.toString());
 
     return await fetch("/api/bookcontent", {

@@ -6,6 +6,7 @@ import { API_IndexRecord } from "../api";
 export type API_BookContentCreateRequest = {
     bookId: string;
     title: string;
+    color: string;
     index: number;
 }
 
@@ -17,12 +18,14 @@ export async function POST(request: Request) {
         const form = await request.formData();
         const bookId = form.get("bookId") as string;
         const title = form.get("title") as string;
+        const color = form.get("color") as string;
         const index = parseInt(form.get("index") as string);
         
         const res = await db.bookContent.create({
             data: {
                 bookId,
                 title,
+                color,
                 index
             },
             include: {

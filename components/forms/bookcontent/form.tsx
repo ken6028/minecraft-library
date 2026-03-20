@@ -16,6 +16,7 @@ type Controller = {
 export function Form_BookContent(): Element_Controller_Response<Controller, boolean> {
     const [raw, setRaw] = useState<EXModel_BookInfo>();
     const [title, setTitle] = useState("");
+    const [color, setColor] = useState("")
 
     const [creating, setCreating] = useState(false);
     
@@ -30,6 +31,10 @@ export function Form_BookContent(): Element_Controller_Response<Controller, bool
                         タイトル
                         <input type="text" value={title} onChange={(ev) => {setTitle(ev.target.value)}} />
                     </label>
+                    <label>
+                        色
+                        <input type="color" value={color} onChange={(ev) => {setColor(ev.target.value)}} />
+                    </label>
                     <button disabled={title.trim() === ""} type="submit">
                         作成
                     </button>
@@ -43,6 +48,7 @@ export function Form_BookContent(): Element_Controller_Response<Controller, bool
             const res = await API_BokkContent_Create({
                 bookId: raw.id,
                 title,
+                color,
                 index: raw.content.length
             });
             setCreating(false);
@@ -60,6 +66,7 @@ export function Form_BookContent(): Element_Controller_Response<Controller, bool
         show(content) {
             setRaw(content);
             setTitle("");
+            setColor("#000000")
             form.controller.show();
         },
         hide() {
