@@ -11,7 +11,7 @@ export async function API_BokkContent_Create({ bookId, title, index }: API_BookC
     return await fetch("/api/bookcontent", {
         method: "POST",
         body: form
-    }).then(res => res.ok ? res.json() as Promise<EXModel_BookContentInfo> : null).catch(res => null);
+    }).then(res => res.ok ? res.json() as Promise<EXModel_BookContentInfo> : null).catch(() => null);
 }
 
 

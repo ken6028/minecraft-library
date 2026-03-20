@@ -8,12 +8,12 @@ export async function API_BookContent_Update(id: string, { title, color }: API_B
     return fetch(`/api/bookcontent/${id}`, {
         method: "PUT",
         body: form
-    }).then(res => res.ok).catch(res => false);
+    }).then(res => res.ok).catch(() => false);
 }
 
 
 export async function API_BookContent_Delete(id: string) {
     return fetch(`/api/bookcontent/${id}`, {
         method: "DELETE"
-    }).then(res => res.ok).catch(res => false);
+    }).then(res => res.ok).catch(() => false);
 }

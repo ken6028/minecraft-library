@@ -10,7 +10,7 @@ export async function API_BookContentProp_Update(id: string, { title, body, info
     return fetch(`/api/bookcontentprop/${id}`, {
         method: "PUT",
         body: form
-    }).then(res => res.ok).catch(res => false);
+    }).then(res => res.ok).catch(() => false);
 }
 
 
@@ -19,5 +19,5 @@ export async function API_BookContentProp_Update(id: string, { title, body, info
 export async function API_BookContentProp_Delete(id: string) {
     return fetch(`/api/bookcontentprop/${id}`, {
         method: "DELETE"
-    }).then(res => res.ok).catch(res => false);
+    }).then(res => res.ok).catch(() => false);
 }

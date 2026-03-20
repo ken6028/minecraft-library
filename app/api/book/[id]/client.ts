@@ -9,7 +9,7 @@ export async function API_Book_Update(id: string, { title, color, isPublic }: AP
     return await fetch(`/api/book/${id}`, {
         method: "PUT",
         body: form
-    }).then(res => res.ok).catch(res => false);
+    }).then(res => res.ok).catch(() => false);
 }
 
 
@@ -23,5 +23,5 @@ export async function API_Book_Update(id: string, { title, color, isPublic }: AP
 export async function API_Book_Delete(id: string) {
     return await fetch(`/api/book/${id}`, {
         method: "DELETE"
-    }).then(res => res.ok).catch(res => false);
+    }).then(res => res.ok).catch(() => false);
 }

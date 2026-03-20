@@ -11,7 +11,7 @@ export function API_Category_Create({ name, isPublic, index }: API_CategoryCreat
     return fetch("/api/category", {
         method: "POST",
         body: form
-    }).then(res => res.ok ? res.json() as Promise<EXModel_BookCategory> : null).catch(res => null);
+    }).then(res => res.ok ? res.json() as Promise<EXModel_BookCategory> : null).catch(() => null);
 }
 
 
@@ -19,5 +19,5 @@ export async function API_Category_UpdateIndex(records: API_IndexRecord[]) {
     return fetch("/api/category", {
         method: "PUT",
         body: JSON.stringify(records)
-    }).then(res => res.ok).catch(res => false);
+    }).then(res => res.ok).catch(() => false);
 }

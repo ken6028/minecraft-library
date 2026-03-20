@@ -12,7 +12,7 @@ export async function API_Book_Create({ title, categoryId, color, index }: API_B
     const res = await fetch("/api/book", {
         method: "POST",
         body: form
-    }).then(res => res.ok ? res.json() as Promise<EXModel_BookSpine> : null).catch(res => null);
+    }).then(res => res.ok ? res.json() as Promise<EXModel_BookSpine> : null).catch(() => null);
 
     return res;
 }

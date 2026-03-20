@@ -10,7 +10,7 @@ export async function API_Blob_Upload(file: File) {
     }).then((res) => {
         if (!res.ok) return null;
         return res.json() as Promise<PutBlobResult>
-    }).catch((res) => null);
+    }).catch(() => null);
 
     return res;
 }

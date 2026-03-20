@@ -12,7 +12,7 @@ export async function API_BookContentProp_Create({ bookContentId, title, body, i
     const res = await fetch("/api/bookcontentprop", {
         method: "POST",
         body: form
-    }).then(res => res.ok ? res.json() as Promise<EXModel_BookContentPropInfo> : null).catch(res => null);
+    }).then(res => res.ok ? res.json() as Promise<EXModel_BookContentPropInfo> : null).catch(() => null);
 
     return res;
 }
