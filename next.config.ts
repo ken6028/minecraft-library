@@ -7,29 +7,34 @@ const vblob_id = process.env.BLOB_READ_WRITE_TOKEN?.split("_")[3].toLowerCase();
 
 const nextConfig: NextConfig = {
   /* config options here */
-  "turbopack": {
-    root: "../../"
-  },
-  images: {
-      remotePatterns: [
-          {
-              protocol: 'https',
-              hostname: `knq2stxhcdd03qgq.public.blob.vercel-storage.com`,
-              port: '',
-              pathname: '/**',
-          },
-          ...((
-              vblob_id ? [
-                  {
-                      protocol: 'https',
-                      hostname: `${vblob_id}.public.blob.vercel-storage.com`,
-                      port: '',
-                      pathname: '/**',
-                  }
-              ] : []
-          ) as RemotePattern[])
-      ],
-  }
+
+  
+//   "turbopack": {
+//     root: "../../"
+//   },
+
+
+
+
+
+    cacheComponents: true,
+
+
+
+    images: {
+        remotePatterns: [
+            ...((
+                vblob_id ? [
+                    {
+                        protocol: 'https',
+                        hostname: `${vblob_id}.public.blob.vercel-storage.com`,
+                        port: '',
+                        pathname: '/**',
+                    }
+                ] : []
+            ) as RemotePattern[])
+        ],
+    }
   
 };
 
