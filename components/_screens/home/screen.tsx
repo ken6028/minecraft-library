@@ -23,7 +23,7 @@ type Props = {
 
 
 export function Screen_Home({ _CanEdit = false, _categories }: Props) {
-    const [_, setUpdate] = useState(0);
+    const [, setUpdate] = useState(0);
     
     const { element: EditorRootElement, status: EditStatus } = EditorRoot({_default: _CanEdit});
 
@@ -53,7 +53,7 @@ export function Screen_Home({ _CanEdit = false, _categories }: Props) {
             }
             {
                 EditStatus.edit &&
-                <PopupInfo>
+                <PopupInfo style={{top: "0.5em", right: "2.5em"}} _type="right">
                     <Button onClick={() => form_category.controller.show(raw)}>
                         カテゴリーを追加
                     </Button>

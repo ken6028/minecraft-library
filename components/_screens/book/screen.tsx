@@ -3,8 +3,7 @@
 import { Frame_Base } from "@/components/_frames/base/frame";
 
 import { EditorRoot } from "@/components/app_props/editor/root/editor.root";
-import { EXModel_BookContentInfo, EXModel_BookInfo } from "@/libs/db";
-import { useState } from "react";
+import { EXModel_BookInfo } from "@/libs/db";
 import { AppProp_Book } from "@/components/app_props/book/appProp";
 
 

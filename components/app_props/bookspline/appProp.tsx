@@ -32,7 +32,10 @@ export function AppProp_BookSpine({ _book, children, ...props }: Props) {
             href={`/book/${_book.id}`}
             draggable={false}
         >
-            <div className={styles.bookmark} />
+            {
+                _book.isPublic &&
+                <div className={styles.bookmark} />
+            }
             <h2 className={styles.title}>
                 {_book.title}
             </h2>

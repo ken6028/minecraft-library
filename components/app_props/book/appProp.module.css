@@ -49,6 +49,7 @@
     
     font-weight: bold;
     writing-mode: vertical-rl;
+    text-orientation: upright;
     white-space: nowrap;
 
     background-color: yellow;
