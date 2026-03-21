@@ -111,6 +111,7 @@ export function Form_BookContent_Edit(imgs: string[]) {
 
     const [title, setTitle] = useState("");
     const [color, setColor] = useState("#000000");
+    const [info, setInfo] = useState<string | null>(null);
     const [isPublic, setIsPublic] = useState(false);
 
 
@@ -136,6 +137,10 @@ export function Form_BookContent_Edit(imgs: string[]) {
                         <input type="color" value={color} onChange={(ev) => {setColor(ev.target.value)}} />
                     </label>
                     <label>
+                        補足情報
+                        <textarea value={info ?? ""} onChange={(ev) => {setInfo(ev.target.value)}} />
+                    </label>
+                    <label>
                         公開設定
                         <Toggle checked={isPublic} onChange={(ev) => setIsPublic(ev.target.checked)} />
                     </label>
@@ -150,6 +155,7 @@ export function Form_BookContent_Edit(imgs: string[]) {
             const res = await API_BookContent_Update(raw?.id, {
                 title,
                 color,
+                info,
                 isPublic
             });
             setUpdating(false);
@@ -157,6 +163,7 @@ export function Form_BookContent_Edit(imgs: string[]) {
             if (res) {
                 raw.title = title;
                 raw.color = color;
+                raw.info = info;
                 raw.isPublic = isPublic;
                 form.controller.hide();
             }
