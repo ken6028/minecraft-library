@@ -51,7 +51,7 @@ export function Form_BookContent_Index() {
 
 export function Form_BookContentProp_Index() {
     return Form_Index_Base<EXModel_BookContentPropInfo>(
-        (v) => v.title,
+        (v) => v.title || v.body.substring(0, 20),
         API_BookContentProp_UpdateIndex
     )
 }
