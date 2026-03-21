@@ -33,6 +33,11 @@ export function AppProp_BookSpine({ _book, children, ...props }: Props) {
             draggable={false}
         >
             {
+                //未公開のコンテンツがない場合は完成としてマーク
+                _book._count.content === 0 &&
+                <div className={styles.complete} />
+            }
+            {
                 _book.isPublic &&
                 <div className={styles.bookmark} />
             }

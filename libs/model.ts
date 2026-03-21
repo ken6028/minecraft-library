@@ -2,12 +2,12 @@ import { db, EXModel_BookCategories, EXModel_BookInfo } from "./db";
 
 export async function DB_GetBookCategories(publicOnly: boolean = true): Promise<EXModel_BookCategories> {
     
-    const isPublic = publicOnly? {isPublic: publicOnly} : {};
+    const isPublic = publicOnly ? {isPublic: true} : {};
     
     const categories = await db.bookCategory.findMany(
         {
             where: {
-                ...isPublic
+                ...isPublic,
             },
             select: {
                 id: true,
@@ -25,7 +25,16 @@ export async function DB_GetBookCategories(publicOnly: boolean = true): Promise<
                         color: true,
 
                         index: true,
-                        isPublic: true
+                        isPublic: true,
+                        _count: {
+                            select: {
+                                content: {
+                                    where: {
+                                        isPublic: false
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -36,14 +45,20 @@ export async function DB_GetBookCategories(publicOnly: boolean = true): Promise<
 }
 
 
-export async function DB_GetBookInfo(bookId: string): Promise<EXModel_BookInfo | null> {
+export async function DB_GetBookInfo(bookId: string, publicOnly: boolean = true): Promise<EXModel_BookInfo | null> {
+    const isPublic = publicOnly ? {isPublic: true} : {};
+    
     const bookInfo = await db.book.findUnique(
         {
             where: {
-                id: bookId
+                id: bookId,
+                ...isPublic
             },
             include: {
                 content: {
+                    where: {
+                        ...isPublic
+                    },
                     include: {
                         props: {
                             include: {

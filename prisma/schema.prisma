@@ -52,6 +52,7 @@ model BookContent {
 
 
   index       Int       @default(0)
+  isPublic    Boolean  @default(false)
 
   bookId      String    @db.Uuid
   book        Book      @relation(fields: [bookId], references: [id], onDelete: Cascade)

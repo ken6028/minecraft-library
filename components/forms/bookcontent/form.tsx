@@ -5,6 +5,7 @@ import { Element_Controller_Response, Template } from "react-client-screen";
 
 import { Form_SelectImage } from "../selectimage/form";
 import { API_BookContent_Update } from "@/app/api/bookcontent/[id]/client";
+import { Toggle } from "@/components/props/input/toggle/input";
 
 
 type Controller = {
@@ -16,7 +17,7 @@ type Controller = {
 export function Form_BookContent(): Element_Controller_Response<Controller, boolean> {
     const [raw, setRaw] = useState<EXModel_BookInfo>();
     const [title, setTitle] = useState("");
-    const [color, setColor] = useState("")
+    const [color, setColor] = useState("");
 
     const [creating, setCreating] = useState(false);
     
@@ -110,6 +111,7 @@ export function Form_BookContent_Edit(imgs: string[]) {
 
     const [title, setTitle] = useState("");
     const [color, setColor] = useState("#000000");
+    const [isPublic, setIsPublic] = useState(false);
 
 
     const [updating, setUpdating] = useState(false);
@@ -133,6 +135,10 @@ export function Form_BookContent_Edit(imgs: string[]) {
                         色
                         <input type="color" value={color} onChange={(ev) => {setColor(ev.target.value)}} />
                     </label>
+                    <label>
+                        公開設定
+                        <Toggle checked={isPublic} onChange={(ev) => setIsPublic(ev.target.checked)} />
+                    </label>
                     <button type="submit">更新</button>
                 </>
             )
@@ -143,13 +149,15 @@ export function Form_BookContent_Edit(imgs: string[]) {
             setUpdating(true);
             const res = await API_BookContent_Update(raw?.id, {
                 title,
-                color
+                color,
+                isPublic
             });
             setUpdating(false);
 
             if (res) {
                 raw.title = title;
                 raw.color = color;
+                raw.isPublic = isPublic;
                 form.controller.hide();
             }
             
@@ -163,6 +171,7 @@ export function Form_BookContent_Edit(imgs: string[]) {
             setRaw(content);
             setTitle(content.title);
             setColor(content.color);
+            setIsPublic(content.isPublic);
             form.controller.show();
         },
         hide() {

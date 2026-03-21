@@ -1,9 +1,10 @@
 import { API_BookContentUpdateRequest } from "./route";
 
-export async function API_BookContent_Update(id: string, { title, color }: API_BookContentUpdateRequest ) {
+export async function API_BookContent_Update(id: string, { title, color, isPublic }: API_BookContentUpdateRequest ) {
     const form = new FormData();
     form.append("title", title);
     form.append("color", color);
+    form.append("isPublic", isPublic.toString());
 
     return fetch(`/api/bookcontent/${id}`, {
         method: "PUT",

@@ -59,7 +59,7 @@ export default async function Page({ params }: Props) {
     const { id } = await params;
 
     const [_book, _imgs] = await Promise.all([
-        DB_GetBookInfo(id),
+        DB_GetBookInfo(id, !ENV.isDevMode),
         GetBlobUrls()
     ]);
     

@@ -34,8 +34,18 @@ export async function POST(request: Request) {
                 id: true,
                 title: true,
                 color: true,
+                categoryId: true,
                 index: true,
-                isPublic: true
+                isPublic: true,
+                _count: {
+                    select: {
+                        content: {
+                            where: {
+                                isPublic: false
+                            }
+                        }
+                    }
+                }
             }
         });
 

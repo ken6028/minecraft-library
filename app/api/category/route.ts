@@ -1,4 +1,4 @@
-import { db } from "@/libs/db";
+import { db, EXModel_BookCategory } from "@/libs/db";
 import { ENV } from "@/libs/env";
 import { NextResponse } from "next/server";
 import { API_IndexRecord } from "../api";
@@ -22,7 +22,7 @@ export async function POST(request: Request) {
         const isPublic = form.get("isPublic") === "true";
         const index = parseInt(form.get("index") as string);
 
-        const category = await db.bookCategory.create({
+        const category: EXModel_BookCategory = await db.bookCategory.create({
             data: {
                 name,
                 isPublic,
@@ -37,6 +37,17 @@ export async function POST(request: Request) {
 
                         index: true,
                         isPublic: true
+                    },
+                    include: {
+                        _count: {
+                            select: {
+                                content: {
+                                    where: {
+                                        isPublic: false
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
