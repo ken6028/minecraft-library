@@ -12,6 +12,7 @@ type Props = {
 export type API_BookContentUpdateRequest = {
     title: string;
     color: string;
+    info: string | null;
     isPublic: boolean;
 }
 
@@ -24,6 +25,7 @@ export async function PUT(request: Request, { params }: Props) {
         const form = await request.formData();
         const title = form.get("title") as string;
         const color = form.get("color") as string;
+        const info = form.get("info") as string | null;
         const isPublic = form.get("isPublic") === "true";
 
         await db.bookContent.update({
@@ -33,6 +35,7 @@ export async function PUT(request: Request, { params }: Props) {
             data: {
                 title,
                 color,
+                info,
                 isPublic
             }
         })
