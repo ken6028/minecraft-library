@@ -80,7 +80,7 @@ export function AppProp_BookContentProp({ _edit, _props, _prop, _imgs, _onDelete
                         {_prop.contentLink.title}
                     </Link>
                 }
-                <div>
+                <div className={styles.body}>
                     <AppProp_Body>
                         {_prop.body}
                     </AppProp_Body>
