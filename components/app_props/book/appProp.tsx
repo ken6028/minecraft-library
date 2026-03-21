@@ -28,7 +28,7 @@ export function AppProp_Book({ _edit, _book, _link, _imgs }: Props) {
     
     
 
-    const sortedContents = raw.content.sort((a, b) => a.index - b.index);
+    const sortedContents = raw.content.sort((a, b) => a.index - b.index).filter(c => c.isPublic || _edit);
     const defaultContent = sortedContents.find(c => c.id === _link) || sortedContents[0];
     
 
