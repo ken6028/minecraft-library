@@ -21,8 +21,6 @@ export type EXModel_BookCategory = Prisma.BookCategoryGetPayload<{
 
         index: true;
         isPublic: true;
-    },
-    include: {
         books: {
             select: {
                 id: true;
@@ -54,8 +52,6 @@ export type EXModel_BookSpine = Prisma.BookGetPayload<{
 
         index: true;
         isPublic: true;
-    }
-    include: {
         _count: {
             select: {
                 content: {
