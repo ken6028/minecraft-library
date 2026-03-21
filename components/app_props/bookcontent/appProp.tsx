@@ -22,7 +22,7 @@ type Props = {
 
 
 export function AppProp_BookContent({ _edit, _bookContents, _bookContent, _imgs, _onDelete }: Props) {
-    const [update, setUpdate] = useState(0);
+    const [, setUpdate] = useState(0);
 
 
     const sortedContentProps = _bookContent.props.sort((a, b) => a.index - b.index);
@@ -74,7 +74,7 @@ export function AppProp_BookContent({ _edit, _bookContents, _bookContent, _imgs,
             }
             {
                 _bookContent.info &&
-                <PopupInfo>
+                <PopupInfo style={{right: "0.25em", top: "0.25em"}} _type="right" >
                     <AppProp_Body>
                         {_bookContent.info}
                     </AppProp_Body>
